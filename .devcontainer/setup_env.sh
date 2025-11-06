@@ -17,17 +17,20 @@ if [ -d "$HOME/.gitconfig" ]; then
   mv "$HOME/.gitconfig" "$HOME/.gitconfig_dir_backup_$(date +%s)"
 fi
 
-# FlutterとNodeのバージョン確認
-echo "🔍 バージョン確認:"
-flutter --version || echo "⚠️ Flutter not found"
-bash -c ". $NVM_DIR/nvm.sh && node -v && npm -v && amplify --version" || echo "⚠️ Node/Amplify not found"
-
-# Amplify CLI のパス再登録（NVM PATH補強）
+# Amplify CLI のパス再登録
 sudo ln -sf "$NVM_DIR/versions/node/v22/bin/amplify" /usr/local/bin/amplify
 sudo ln -sf "$NVM_DIR/versions/node/v22/bin/node" /usr/local/bin/node
 sudo ln -sf "$NVM_DIR/versions/node/v22/bin/npm" /usr/local/bin/npm
 
 # Flutterキャッシュ更新
 flutter precache
+
+# バージョン確認
+echo "🔍 バージョン確認:"
+flutter --version
+node -v
+npm -v
+amplify --version
+aws --version
 
 echo "✅ セットアップ完了！"

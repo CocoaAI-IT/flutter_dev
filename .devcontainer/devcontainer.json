@@ -1,14 +1,16 @@
 {
   "name": "Flutter + Amplify Dev",
-  "dockerComposeFile": "docker-compose.yaml",
+  "dockerComposeFile": "../docker-compose.yaml",
   "service": "flutter-dev",
   "workspaceFolder": "/home/dev/app",
-
-  // UbuntuServer上のパスにマウント
   "remoteUser": "dev",
 
+  // Ubuntu Server上でマウントするパス
   "mounts": [
-    "source=/home/aaaa/flutter-dev,target=/home/dev/app,type=bind"
+    "source=/home/aaaa/flutter-dev,target=/home/dev/app,type=bind,consistency=cached",
+    "source=/home/aaaa/.aws,target=/home/dev/.aws,type=bind,readonly",
+    "source=/home/aaaa/.ssh,target=/home/dev/.ssh,type=bind,readonly",
+    "source=/home/aaaa/.gitconfig,target=/home/dev/.gitconfig,type=bind,readonly"
   ],
 
   "customizations": {
@@ -26,9 +28,10 @@
   },
 
   "containerEnv": {
-    "AWS_PROFILE": "sugiyama",  // 自分のAWSプロファイル名に変更
+    "AWS_PROFILE": "hogehoge",
     "PUB_CACHE": "/usr/local/flutter_cache"
   },
 
-  "postCreateCommand": "bash /home/dev/app/.devcontainer/setup_env.sh"
+  // コンテナ初回起動後に実行
+  "postCreateCommand": "bash /home/dev/app/.devcontainer/setup.sh"
 }

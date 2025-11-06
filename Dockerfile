@@ -28,6 +28,7 @@ RUN mkdir -p $NVM_DIR \
 # Flutter SDK
 # ======================
 RUN git clone https://github.com/flutter/flutter.git -b stable /flutter
+ENV PATH="${PATH}:/flutter/bin"
 RUN flutter doctor -v
 
 # ======================
@@ -37,22 +38,16 @@ RUN mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools
 WORKDIR /opt/android-sdk/cmdline-tools
 RUN wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O /tmp/cmdline-tools.zip \
     && unzip /tmp/cmdline-tools.zip -d /opt/android-sdk/cmdline-tools \
-    # ↓ cmdline-tools/cmdline-tools/... という二重構造を修正
     && mv /opt/android-sdk/cmdline-tools/cmdline-tools /opt/android-sdk/cmdline-tools/latest \
     && rm /tmp/cmdline-tools.zip
 
-# PATH を再確認して sdkmanager が見える状態に
 ENV PATH=${PATH}:${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin
-
-# SDK コンポーネントをインストール
 RUN yes | sdkmanager --sdk_root=${ANDROID_SDK_ROOT} \
     "platform-tools" \
     "platforms;android-34" \
     "build-tools;34.0.0" \
-    "cmdline-tools;latest"
-
-# ライセンスを自動承諾
-RUN yes | sdkmanager --licenses
+    "cmdline-tools;latest" \
+    && yes | sdkmanager --licenses
 
 # ======================
 # AWS CLI
@@ -69,6 +64,15 @@ RUN mkdir -p $PUB_CACHE
 # ======================
 # 開発ユーザー設定
 # ======================
-RUN useradd -ms /bin/bash dev && usermod -aG sudo dev
+RUN useradd -ms /bin/bash dev && usermod -aG sudo dev \
+    && echo "dev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
 USER dev
 WORKDIR /home/dev/app
+
+# ======================
+# 初期PATH・NVM設定を確実に読み込ませるための設定
+# ======================
+RUN echo 'export NVM_DIR="/usr/local/nvm"' >> /home/dev/.bashrc \
+    && echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"' >> /home/dev/.bashrc \
+    && echo 'export PATH=$PATH:/flutter/bin:$NVM_DIR/versions/node/v22/bin:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools' >> /home/dev/.bashrc
