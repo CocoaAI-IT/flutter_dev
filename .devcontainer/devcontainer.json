@@ -1,0 +1,34 @@
+{
+  "name": "Flutter + Amplify Dev",
+  "dockerComposeFile": "docker-compose.yaml",
+  "service": "flutter-dev",
+  "workspaceFolder": "/home/dev/app",
+
+  // UbuntuServer上のパスにマウント
+  "remoteUser": "dev",
+
+  "mounts": [
+    "source=/home/aaaa/flutter-dev,target=/home/dev/app,type=bind"
+  ],
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Dart-Code.flutter",
+        "Dart-Code.dart-code",
+        "ms-azuretools.vscode-docker",
+        "amazonwebservices.aws-toolkit-vscode",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode-remote.remote-ssh",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+
+  "containerEnv": {
+    "AWS_PROFILE": "sugiyama",  // 自分のAWSプロファイル名に変更
+    "PUB_CACHE": "/usr/local/flutter_cache"
+  },
+
+  "postCreateCommand": "bash /home/dev/app/.devcontainer/setup_env.sh"
+}

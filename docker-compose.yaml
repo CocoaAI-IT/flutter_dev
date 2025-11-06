@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  flutter-dev:
+    build: .
+    container_name: flutter-dev
+    volumes:
+      - ./:/home/dev/app
+      - ~/.aws:/home/dev/.aws:ro        # AWS CLI認証情報を共有
+      - ~/.ssh:/home/dev/.ssh:ro        # GitHub等にアクセスするためのSSHキー
+      - ~/.gitconfig:/home/dev/.gitconfig:ro
+    environment:
+      - AWS_PROFILE=sugiyama             # 自分のAWSプロファイル名に変更
+      - PUB_CACHE=/usr/local/flutter_cache
+    tty: true
