@@ -1,0 +1,33 @@
+{
+  "recommendations": [
+    // Flutter & Dart (必須)
+    "dart-code.flutter",
+    "dart-code.dart-code",
+
+    // コード支援
+    "nash.awesome-flutter-snippets",
+    "jeroen-meijer.pubspec-assist",
+    "alexisvt.flutter-snippets",
+
+    // エラー表示
+    "usernamehw.errorlens",
+
+    // Git統合
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+
+    // UI/UX
+    "pkief.material-icon-theme",
+    "zhuangtongfa.material-theme",
+
+    // コード品質
+    "streetsidesoftware.code-spell-checker",
+    "editorconfig.editorconfig",
+
+    // ユーティリティ
+    "gruntfuggly.todo-tree",
+    "wayou.vscode-todo-highlight",
+    "aaron-bond.better-comments"
+  ],
+  "unwantedRecommendations": []
+}
