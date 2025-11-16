@@ -1,0 +1,80 @@
+{
+  // Flutter & Dart設定
+  "dart.flutterSdkPath": null,
+  "dart.lineLength": 80,
+  "dart.debugExternalPackageLibraries": false,
+  "dart.debugSdkLibraries": false,
+  "dart.previewFlutterUiGuides": true,
+  "dart.previewFlutterUiGuidesCustomTracking": true,
+  "dart.enableSnippets": true,
+  "dart.analysisExcludedFolders": [
+    "**/node_modules/**",
+    "**/.dart_tool/**",
+    "**/build/**"
+  ],
+
+  // エディタ設定
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.rulers": [80, 120],
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+
+  // ファイル除外設定
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.dart_tool": true,
+    "**/build": true,
+    "**/*.g.dart": true,
+    "**/*.freezed.dart": true
+  },
+
+  // 検索除外設定
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/.dart_tool": true,
+    "**/build": true,
+    "**/.git": true,
+    "**/*.g.dart": true,
+    "**/*.freezed.dart": true
+  },
+
+  // ファイルの関連付け
+  "files.associations": {
+    "*.dart": "dart"
+  },
+
+  // 保存時の自動整形
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
+  },
+
+  // Git設定
+  "git.ignoreLimitWarning": true,
+
+  // ターミナル設定
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+
+  // その他
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.iconTheme": "vs-seti"
+}
